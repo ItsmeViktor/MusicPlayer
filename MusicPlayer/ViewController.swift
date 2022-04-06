@@ -65,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         present(vc, animated: true)
     }
 
-
+}
 struct Song {
     let name: String
     let AlbumName: String
@@ -73,4 +73,4 @@ struct Song {
     let imageName: String
     let trackName: String
 }
-}
+
