@@ -167,11 +167,26 @@ class PlayerViewController: UIViewController {
     }
     
     @objc func didTapBackButton () {
+        if position > 0 {
+            position = position - 1
+            player?.stop()
+            for subview in holder.subviews {
+                subview.removeFromSuperview()
+             }
+            configure()
+           }
     
         }
         
-    
-    @objc func didTapNextButton () {
+        @objc func didTapNextButton() {
+            if position < (songs.count - 1) {
+                position = position + 1
+                player?.stop()
+                for subview in holder.subviews {
+                    subview.removeFromSuperview()
+                }
+                configure()
+            }
         
     }
     
@@ -180,10 +195,36 @@ class PlayerViewController: UIViewController {
         if player?.isPlaying == true {
             //pause
             player?.pause()
+            //show play button
+            playPauseButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+            
+            //shrink image
+            UIView.animate(withDuration: 0.3, animations: {
+                self.albumImageView.frame = CGRect(x: 40,
+                                              y: 40,
+                                              width: self.holder.frame.size.width-80,
+                                              height: self.holder.frame.size.width-80)
+
+                
+            })
+            
         }
             else {
                 //play
                 player?.play()
+                playPauseButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+                
+                
+                
+                //increase size
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.albumImageView.frame = CGRect(x: 10,
+                                                  y: 10,
+                                                  width: self.holder.frame.size.width-20,
+                                                  height: self.holder.frame.size.width-20)
+
+                    
+                })
             }
     }
     
